@@ -41,7 +41,7 @@ public class ConfirmDialog extends BaseDialog {
     public void initUi() {
         mainTable = new Table(Assets.$().uiSkin);
         group.addActor(mainTable);
-        mainTable.setBackground(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_CONFIRM_DIALOG_BG))));
+        mainTable.setBackground(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_DARK_GRAY))));
         mainTable.setSize(
                 MenuStage.$().getWidth() / 2,
                 MenuStage.$().getHeight() / 1.5f

@@ -22,9 +22,9 @@ public class Constants {
 
     public static final String IMAGE_WORLD = "world.jpg";
     public static final String IMAGE_MENU_BG = "menu/menu_bg.jpg";
-    public static final String IMAGE_HUD_BG = "bgHud";
-    public static final String IMAGE_CONFIRM_DIALOG_BG = "confirm_dialog_background";
-    public static final String IMAGE_BUTTON_BG = "bgBtn";
+//    public static final String IMAGE_HUD_BG = "bgHud";
+    public static final String IMAGE_DARK_GRAY = "dark_gray_bg.9";
+    public static final String IMAGE_BUTTON_BG = "bg_btn";
 
     public static final String IMAGE_SHOP_BTN = "shop_btn";
     public static final String IMAGE_CLOSE_SHOP = "close_shop_dialog";

@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -34,7 +34,7 @@ import com.mygdx.game.util.Constants;
 public class ShopDialog extends Table {
     private static ShopDialog instance;
     private boolean isOpened;
-    private ImageButton closeDialogBtn;
+    private Button closeDialogBtn;
     private Label shopCardText;
     private Table itemScrollTable;
 
@@ -69,7 +69,7 @@ public class ShopDialog extends Table {
                 .size(Value.percentWidth(.15f, this), Value.percentHeight(.1f, this));
 
 
-        closeDialogBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
+        closeDialogBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
         closeDialogBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -77,7 +77,7 @@ public class ShopDialog extends Table {
             }
         });
         add(closeDialogBtn)
-                .size(Value.percentWidth(.05f, this), Value.percentHeight(.15f, this))
+                .size(Value.percentHeight(.15f, this), Value.percentHeight(.15f, this))
                 .align(Align.topRight)
                 .right()
                 .row();
@@ -102,7 +102,7 @@ public class ShopDialog extends Table {
     }
 
     private void initMainTable() {
-        setBackground(Assets.$().defaultSkin.getDrawable((Constants.IMAGE_CONFIRM_DIALOG_BG)));
+        setBackground(Assets.$().defaultSkin.getDrawable((Constants.IMAGE_DARK_GRAY)));
         setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 1.8f);
     }
 
@@ -134,7 +134,7 @@ public class ShopDialog extends Table {
 
         Cell currentCell;
         private int currentState = STATE_CARD_VIEW;
-        private ImageButton informationBtn;
+        private Button informationBtn;
         private Image itemImage;
         private Label informationText;
         private Label nameText;
@@ -146,7 +146,7 @@ public class ShopDialog extends Table {
             setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CARD_BACKGROUND));
             setTouchable(Touchable.enabled);
 
-            informationBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
+            informationBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
             informationBtn.addListener(new ActorGestureListener() {
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
@@ -164,7 +164,7 @@ public class ShopDialog extends Table {
             informationText.setAlignment(Align.topLeft);
             informationText.setWrap(true);
 
-            priceBtn = new TextButton(String.valueOf(data.price), new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null,Assets.$().defaultFont));
+            priceBtn = new TextButton(String.valueOf(data.price), new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
             priceBtn.getLabel().setFontScale(0.7f);
             add(informationBtn)
                     .size(Value.percentWidth(0.25f, this), Value.percentHeight(0.20f, this))

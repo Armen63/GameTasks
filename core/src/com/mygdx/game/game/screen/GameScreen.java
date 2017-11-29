@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
@@ -28,7 +27,7 @@ import com.mygdx.game.util.Constants;
 
 import static com.badlogic.gdx.Gdx.app;
 import static com.mygdx.game.util.Constants.HUD_DELTA_HEIGHT;
-import static com.mygdx.game.util.Constants.IMAGE_HUD_BG;
+import static com.mygdx.game.util.Constants.IMAGE_DARK_GRAY;
 import static com.mygdx.game.util.Constants.IMAGE_SHOP_BTN;
 import static com.mygdx.game.util.Constants.IMAGE_WORLD;
 import static com.mygdx.game.util.Constants.MUSIC_GAME_SCREEN;
@@ -79,7 +78,7 @@ public class GameScreen extends AbstractBaseScreen {
 
     private void initHud() {
         app.log("ssssss", "gdx" + Gdx.graphics.getWidth());
-        drbBackground = Assets.$().defaultSkin.getDrawable(IMAGE_HUD_BG);
+        drbBackground = Assets.$().defaultSkin.getDrawable(IMAGE_DARK_GRAY);
         mainTable = new Table();
         mainTable.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -99,14 +98,14 @@ public class GameScreen extends AbstractBaseScreen {
     private void hudLabelOne() {
         hudLabelOne = new Label("100205", new Label.LabelStyle(Assets.$().defaultFont, Color.BLUE));
         hudTable.add(new Container<>(hudLabelOne)
-                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_DARK_GRAY)))
                 .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable));
     }
 
     private void hudLabelTwo() {
         hudLabelTwo = new Label("20000", new Label.LabelStyle(Assets.$().defaultFont, Color.RED));
         hudTable.add(new Container<>(hudLabelTwo)
-                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_DARK_GRAY)))
                 .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable))
                 .padLeft(Value.percentWidth(0.1f, hudTable));
     }
@@ -114,7 +113,7 @@ public class GameScreen extends AbstractBaseScreen {
     private void hudLabelThree() {
         hudLabelThree = new Label("1469503", new Label.LabelStyle(Assets.$().defaultFont, Color.YELLOW));
         hudTable.add(new Container<>(hudLabelThree)
-                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_DARK_GRAY)))
                 .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable))
                 .padLeft(Value.percentWidth(0.1f, hudTable));
     }
@@ -134,7 +133,7 @@ public class GameScreen extends AbstractBaseScreen {
                 .expandY()
                 .row();
 
-        shopDialogBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(IMAGE_SHOP_BTN));
+        shopDialogBtn = new Button(Assets.$().defaultSkin.getDrawable(IMAGE_SHOP_BTN));
         shopDialogBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

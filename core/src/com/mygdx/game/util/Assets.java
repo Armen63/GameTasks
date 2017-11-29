@@ -34,7 +34,7 @@ public class Assets extends AssetManager {
         load(Constants.IMAGE_WORLD, Texture.class);
 //        load(Constants.IMAGE_HUD_BG, Texture.class);
         load(Constants.IMAGE_MENU_BG, Texture.class);
-//        load(Constants.IMAGE_CONFIRM_DIALOG_BG, Texture.class);
+//        load(Constants.IMAGE_DARK_GRAY, Texture.class);
 //        load(Constants.IMAGE_BUTTON_BG, Texture.class);
 //        load(Constants.IMAGE_SHOP_BTN, Texture.class);
 //        load(Constants.IMAGE_CLOSE_SHOP, Texture.class);

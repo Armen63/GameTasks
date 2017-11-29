@@ -5,14 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.dialog.ExitConfirmDialog;
 import com.mygdx.game.game.stage.MenuStage;
@@ -57,7 +55,7 @@ public class MenuScreen extends AbstractBaseScreen {
         table = new Table();
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.align(Align.center);
-        btnStart = new TextButton("Start", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().defaultFont));
+        btnStart = new TextButton("Start", new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
         btnStart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -72,7 +70,7 @@ public class MenuScreen extends AbstractBaseScreen {
                 .row();
 
 
-        btnExit = new TextButton("Exit", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().defaultFont));
+        btnExit = new TextButton("Exit", new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
         btnExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
