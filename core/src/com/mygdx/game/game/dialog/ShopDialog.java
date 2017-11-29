@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -166,11 +167,12 @@ public class ShopDialog extends Table {
 
             priceBtn = new TextButton(String.valueOf(data.price), new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
             priceBtn.getLabel().setFontScale(0.7f);
-            add(informationBtn)
-                    .size(Value.percentWidth(0.25f, this), Value.percentHeight(0.20f, this))
-                    .padTop(Value.percentHeight(.06f, this))
+            add(new Container<>(informationBtn)
+                    .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_ELIXIR_BG))
+                    .size(Value.percentWidth(0.25f, this), Value.percentHeight(0.18f, this))
+                    .padTop(Value.percentHeight(.08f, this))
                     .padLeft(Value.percentWidth(.02f, this))
-                    .align(Align.topLeft);
+                    .align(Align.topLeft));
 
             add(nameText)
                     .size(Value.percentWidth(0.58f, this), Value.percentHeight(0.15f, this))
@@ -194,7 +196,6 @@ public class ShopDialog extends Table {
 
         void showInformation() {
             ScrollPane scroll = new ScrollPane(informationText);
-
             currentCell.setActor(scroll);
         }
 

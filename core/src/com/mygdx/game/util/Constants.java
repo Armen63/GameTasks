@@ -30,6 +30,7 @@ public class Constants {
     public static final String IMAGE_CLOSE_SHOP = "close_shop_dialog";
     public static final String IMAGE_CARD_BACKGROUND = "card_background";
     public static final String IMAGE_SHOP_INFO_BUTTON = "info";
+    public static final String IMAGE_ELIXIR_BG = "elixir";
 
     public static final String SOUND_PATH = "music/";
     public static final String MUSIC_MENU_SCREEN = "menu_screen_music";

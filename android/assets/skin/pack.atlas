@@ -1,56 +1,56 @@
 
 pack.png
-size: 512,512
+size: 256,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-bgBtn
+bg_btn
   rotate: false
-  xy: 132, 30
-  size: 320, 160
-  orig: 320, 160
-  offset: 0, 0
-  index: -1
-bgHud
-  rotate: false
-  xy: 68, 4
-  size: 147, 24
-  orig: 147, 24
+  xy: 2, 138
+  size: 100, 60
+  orig: 100, 60
   offset: 0, 0
   index: -1
 card_background
   rotate: false
-  xy: 260, 192
+  xy: 2, 200
   size: 218, 262
   orig: 218, 262
   offset: 0, 0
   index: -1
 close_shop_dialog
   rotate: false
-  xy: 2, 2
+  xy: 2, 72
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-confirm_dialog_background
+dark_gray_bg.9
   rotate: false
-  xy: 480, 438
-  size: 16, 16
+  xy: 2, 2
+  size: 2, 2
   split: 0, 0, 0, 0
-  orig: 16, 16
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+elixir
+  rotate: false
+  xy: 2, 6
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 info
   rotate: false
-  xy: 2, 68
-  size: 128, 128
-  orig: 128, 128
+  xy: 104, 134
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 shop_btn
   rotate: false
-  xy: 2, 198
-  size: 256, 256
-  orig: 256, 256
+  xy: 170, 134
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
