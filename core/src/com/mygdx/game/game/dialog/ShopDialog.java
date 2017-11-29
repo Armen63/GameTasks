@@ -3,7 +3,6 @@ package com.mygdx.game.game.dialog;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -21,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.ItemData;
 import com.mygdx.game.game.stage.UiStage;
@@ -65,13 +63,13 @@ public class ShopDialog extends Table {
     }
 
     private void initTopOfShop() {
-        shopCardText = new Label("Shop Deck", new Label.LabelStyle(Assets.$().uiSkin.getFont("defaultFont"), Color.RED));
+        shopCardText = new Label("Shop Deck", new Label.LabelStyle(Assets.$().defaultFont, Color.RED));
         shopCardText.setAlignment(Align.center);
         add(shopCardText)
                 .size(Value.percentWidth(.15f, this), Value.percentHeight(.1f, this));
 
 
-        closeDialogBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_CLOSE_SHOP))));
+        closeDialogBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
         closeDialogBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -87,7 +85,7 @@ public class ShopDialog extends Table {
 
     private void initScrollTable() {
         itemScrollTable = new Table();
-        itemScrollTable.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        itemScrollTable.setSize(Gdx.graphics.getWidth(), 5);
         itemScrollTable.align(Align.center);
         itemScrollTable.setPosition(0, 0);
 
@@ -104,7 +102,7 @@ public class ShopDialog extends Table {
     }
 
     private void initMainTable() {
-        setBackground(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_CONFIRM_DIALOG_BG))));
+        setBackground(Assets.$().defaultSkin.getDrawable((Constants.IMAGE_CONFIRM_DIALOG_BG)));
         setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 1.8f);
     }
 
@@ -145,10 +143,10 @@ public class ShopDialog extends Table {
         public ShopItem(ItemData data) {
 
             setSize(400, 600);
-            setBackground(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_CARD_BACKGROUND))));
+            setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CARD_BACKGROUND));
             setTouchable(Touchable.enabled);
 
-            informationBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_SHOP_INFO_BUTTON))));
+            informationBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
             informationBtn.addListener(new ActorGestureListener() {
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
@@ -161,12 +159,12 @@ public class ShopDialog extends Table {
             nameText.setFontScale(0.65f);
             nameText.setEllipsis(true);
 
-            informationText = new Label(data.description, new Label.LabelStyle(new Label.LabelStyle(Assets.$().defaultFont, Color.PINK)));
+            informationText = new Label(data.description, new Label.LabelStyle(new Label.LabelStyle(Assets.$().tempFont, Color.GOLD)));
             informationText.setFontScale(0.6f);
             informationText.setAlignment(Align.topLeft);
             informationText.setWrap(true);
 
-            priceBtn = new TextButton(String.valueOf(data.price), new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().uiSkin.getFont("defaultFont")));
+            priceBtn = new TextButton(String.valueOf(data.price), new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null,Assets.$().defaultFont));
             priceBtn.getLabel().setFontScale(0.7f);
             add(informationBtn)
                     .size(Value.percentWidth(0.25f, this), Value.percentHeight(0.20f, this))
@@ -191,11 +189,12 @@ public class ShopDialog extends Table {
                     .colspan(2)
                     .align(Align.bottom);
             currentCell = getCell(itemImage);
+            currentCell.align(Align.center);
         }
 
         void showInformation() {
             ScrollPane scroll = new ScrollPane(informationText);
-//            scroll.setForceScroll(false, false);
+
             currentCell.setActor(scroll);
         }
 

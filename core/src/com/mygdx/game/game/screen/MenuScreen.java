@@ -57,7 +57,7 @@ public class MenuScreen extends AbstractBaseScreen {
         table = new Table();
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.align(Align.center);
-        btnStart = new TextButton("Start", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().uiSkin.getFont("defaultFont")));
+        btnStart = new TextButton("Start", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().defaultFont));
         btnStart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -72,7 +72,7 @@ public class MenuScreen extends AbstractBaseScreen {
                 .row();
 
 
-        btnExit = new TextButton("Exit", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().uiSkin.getFont("defaultFont")));
+        btnExit = new TextButton("Exit", new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().defaultFont));
         btnExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

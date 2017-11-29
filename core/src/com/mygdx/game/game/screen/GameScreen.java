@@ -6,9 +6,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.dialog.ShopDialog;
 import com.mygdx.game.game.stage.GameStage;
@@ -25,9 +24,11 @@ import com.mygdx.game.managers.CameraManager;
 import com.mygdx.game.managers.ItemDataManager;
 import com.mygdx.game.managers.SoundManager;
 import com.mygdx.game.util.Assets;
+import com.mygdx.game.util.Constants;
 
 import static com.badlogic.gdx.Gdx.app;
 import static com.mygdx.game.util.Constants.HUD_DELTA_HEIGHT;
+import static com.mygdx.game.util.Constants.IMAGE_HUD_BG;
 import static com.mygdx.game.util.Constants.IMAGE_SHOP_BTN;
 import static com.mygdx.game.util.Constants.IMAGE_WORLD;
 import static com.mygdx.game.util.Constants.MUSIC_GAME_SCREEN;
@@ -78,7 +79,7 @@ public class GameScreen extends AbstractBaseScreen {
 
     private void initHud() {
         app.log("ssssss", "gdx" + Gdx.graphics.getWidth());
-        drbBackground = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("bgHud.png"))));
+        drbBackground = Assets.$().defaultSkin.getDrawable(IMAGE_HUD_BG);
         mainTable = new Table();
         mainTable.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -86,7 +87,6 @@ public class GameScreen extends AbstractBaseScreen {
         hudTable = new Table();
         hudTable.setSize(Gdx.graphics.getWidth(), HUD_DELTA_HEIGHT);
         hudTable.align(Align.top);
-        hudTable.padTop(Value.percentHeight(.02f, mainTable));
 
 
         hudLabelOne();
@@ -97,28 +97,26 @@ public class GameScreen extends AbstractBaseScreen {
     }
 
     private void hudLabelOne() {
-        hudLabelOne = new Label("100205", new Label.LabelStyle(Assets.$().uiSkin.getFont("defaultFont"), Color.BLUE));
-        hudTable.add(hudLabelOne)
-                .size(Value.percentWidth(.23f, hudTable), Value.percentHeight(.1f, hudTable))
-                .align(Align.topLeft)
-                .padLeft(Value.percentWidth(.1f, hudTable));
-
+        hudLabelOne = new Label("100205", new Label.LabelStyle(Assets.$().defaultFont, Color.BLUE));
+        hudTable.add(new Container<>(hudLabelOne)
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable));
     }
 
     private void hudLabelTwo() {
-        hudLabelTwo = new Label("20000", new Label.LabelStyle(Assets.$().uiSkin.getFont("defaultFont"), Color.RED));
-        hudTable.add(hudLabelTwo)
-                .size(Value.percentWidth(.23f, hudTable), Value.percentHeight(.1f, hudTable))
-                .align(Align.topLeft)
-                .padLeft(Value.percentWidth(.1f, hudTable));
+        hudLabelTwo = new Label("20000", new Label.LabelStyle(Assets.$().defaultFont, Color.RED));
+        hudTable.add(new Container<>(hudLabelTwo)
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable))
+                .padLeft(Value.percentWidth(0.1f, hudTable));
     }
 
     private void hudLabelThree() {
-        hudLabelThree = new Label("1469503", new Label.LabelStyle(Assets.$().uiSkin.getFont("defaultFont"), Color.YELLOW));
-        hudTable.add(hudLabelThree)
-                .size(Value.percentWidth(.24f, hudTable), Value.percentHeight(.1f, hudTable))
-                .align(Align.topLeft)
-                .padLeft(Value.percentWidth(.1f, hudTable));
+        hudLabelThree = new Label("1469503", new Label.LabelStyle(Assets.$().defaultFont, Color.YELLOW));
+        hudTable.add(new Container<>(hudLabelThree)
+                .background(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CONFIRM_DIALOG_BG)))
+                .size(Value.percentWidth(.2f, hudTable), Value.percentHeight(1f, hudTable))
+                .padLeft(Value.percentWidth(0.1f, hudTable));
     }
 
     private void initBackground() {
@@ -136,7 +134,7 @@ public class GameScreen extends AbstractBaseScreen {
                 .expandY()
                 .row();
 
-        shopDialogBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(IMAGE_SHOP_BTN))));
+        shopDialogBtn = new ImageButton(Assets.$().defaultSkin.getDrawable(IMAGE_SHOP_BTN));
         shopDialogBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -159,7 +157,6 @@ public class GameScreen extends AbstractBaseScreen {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        gsStage.getViewport().apply();
         gsStage.getViewport().update(
                 (int) Gdx.graphics.getWidth(),
                 (int) Gdx.graphics.getHeight(),

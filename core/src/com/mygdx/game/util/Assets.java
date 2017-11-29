@@ -17,28 +17,34 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Assets extends AssetManager {
     private static Assets instance;
+    public Skin defaultSkin;
 
     private Assets() {
         super();
         loadImages();
+        defaultSkin = new Skin(
+                Gdx.files.internal("skin/uiskin.json"),
+                new TextureAtlas(Gdx.files.internal("skin/pack.atlas"))
+        );
+
     }
+
 
     public void loadImages() {
         load(Constants.IMAGE_WORLD, Texture.class);
-        load(Constants.IMAGE_HUD_BG, Texture.class);
+//        load(Constants.IMAGE_HUD_BG, Texture.class);
         load(Constants.IMAGE_MENU_BG, Texture.class);
-        load(Constants.ICON_GAME_BACK, Texture.class);
-        load(Constants.IMAGE_CONFIRM_DIALOG_BG, Texture.class);
-        load(Constants.IMAGE_BUTTON_BG, Texture.class);
-        load(Constants.IMAGE_SHOP_BTN, Texture.class);
-        load(Constants.IMAGE_CLOSE_SHOP, Texture.class);
-        load(Constants.IMAGE_CARD_BACKGROUND, Texture.class);
-        load(Constants.IMAGE_SHOP_LABEL_TEXT, Texture.class);
-        load(Constants.IMAGE_SHOP_INFO_BUTTON, Texture.class);
+//        load(Constants.IMAGE_CONFIRM_DIALOG_BG, Texture.class);
+//        load(Constants.IMAGE_BUTTON_BG, Texture.class);
+//        load(Constants.IMAGE_SHOP_BTN, Texture.class);
+//        load(Constants.IMAGE_CLOSE_SHOP, Texture.class);
+//        load(Constants.IMAGE_CARD_BACKGROUND, Texture.class);
+//        load(Constants.IMAGE_SHOP_INFO_BUTTON, Texture.class);
     }
 
     public FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     public BitmapFont defaultFont = defaultFont();
+    public BitmapFont tempFont = tempFont();
     public Skin uiSkin;
 
     private BitmapFont defaultFont() {
@@ -48,16 +54,21 @@ public class Assets extends AssetManager {
         parameter.shadowOffsetX = 3;
         parameter.shadowOffsetY = 2;
         parameter.borderWidth = 2;
-        parameter.borderColor = new Color(Color.PINK);
-        parameter.shadowColor = new Color(Color.PINK);
+        parameter.borderColor = new Color(Color.RED);
+        parameter.shadowColor = new Color(Color.RED);
         BitmapFont currentFont = generator.generateFont(parameter);
         generator.dispose();
 
+        return currentFont;
+    }
 
-        uiSkin = new Skin();
-        uiSkin.add("defaultFont", currentFont);
-        uiSkin.addRegions(new TextureAtlas(Gdx.files.internal("uiskin.atlas")));
-        uiSkin.load(Gdx.files.internal("uiskin.json"));
+    private BitmapFont tempFont() {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("default.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 70;
+        BitmapFont currentFont = generator.generateFont(parameter);
+        generator.dispose();
+
         return currentFont;
     }
 
