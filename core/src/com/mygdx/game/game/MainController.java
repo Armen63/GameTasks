@@ -9,7 +9,7 @@ public class MainController extends BaseGame {
 
 
 
-	public static Screen currentScreen;
+	private static Screen currentScreen;
 
 	@Override
 	public void create() {

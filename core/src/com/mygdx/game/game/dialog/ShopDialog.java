@@ -21,12 +21,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.ItemData;
+import com.mygdx.game.game.MainController;
 import com.mygdx.game.game.stage.UiStage;
 import com.mygdx.game.managers.ItemDataManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
+
+import static com.badlogic.gdx.Gdx.app;
 
 /**
  * Created by Armen on 11/17/2017.
@@ -44,14 +48,14 @@ public class ShopDialog extends Table {
             @Override
             public boolean handle(Event event) {
                 event.cancel();
-                Gdx.app.log("cancel block", " handle");
+                app.log("cancel block", " handle");
                 return false;
             }
         });
     }
 
     public ShopDialog() {
-        Gdx.app.log("sjakshdjaw", "asdasda");
+        app.log("sjakshdjaw", "asdasda");
         initUi();
     }
 
@@ -86,19 +90,52 @@ public class ShopDialog extends Table {
 
     private void initScrollTable() {
         itemScrollTable = new Table();
-//        itemScrollTable.setSize(Gdx.graphics.getWidth(), 5);
         itemScrollTable.align(Align.center);
         itemScrollTable.setPosition(0, 0);
 
         ScrollPane scroll = new ScrollPane(itemScrollTable);
         scroll.setForceScroll(false, false);
         for (ItemData data : ItemDataManager.$().itemData) {
-            itemScrollTable.add(new ShopItem(data));
+            ShopItem item = new ShopItem(data);
+            itemScrollTable.add(item);
+            item.addListener(new DragListener() {
+                @Override
+                public void drag(InputEvent event, float x, float y, int pointer) {
+                    if (item.getParent() instanceof Table) {
+                        item.remove();
+                        MainController.getGameScreen().getGameStage().addActor(item);
+                        hide();
+                    }
+                    item.setPosition(Gdx.graphics.getWidth()/2 - item.itemW / 2 + x/2, 2000);
+                    item.addAction(Actions.moveTo((Gdx.graphics.getWidth() - item.itemW) * .5f, (Gdx.graphics.getHeight() - item.getHeight()) * .5f, 1.5f,Interpolation.bounce));
+                    item.clearListeners();
+                    item.addListener(new DragListener() {
+                        @Override
+                        public void drag(InputEvent event, float x, float y, int pointer) {
+                            item.setPosition(item.getX() - item.itemW / 2 + x, item.getY() - item.itemH / 2 + y);
+                        }
+
+                        @Override
+                        public void dragStop(InputEvent event, float x, float y, int pointer) {
+                            item.setTransform(true);
+                            item.addAction(Actions.sequence(Actions.scaleTo(0, 0, 1.3f, Interpolation.pow3),
+                                    Actions.addAction(new RunnableAction() {
+                                        @Override
+                                        public void run() {
+                                            item.remove();
+                                            MainController.getGameScreen().getGameStage().addSpineBoy((int) item.getX(), (int) item.getY());
+                                        }
+                                    })));
+                        }
+                    });
+                }
+            });
         }
 
         add(scroll)
                 .size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2.1f)
                 .colspan(2);
+
 
     }
 
@@ -133,6 +170,9 @@ public class ShopDialog extends Table {
         private static final int STATE_CARD_VIEW = 1;
         private static final int STATE_INFO_VIEW = 2;
 
+        int itemW = 400;
+        int itemH = 600;
+
         Cell currentCell;
         private int currentState = STATE_CARD_VIEW;
         private Button informationBtn;
@@ -141,9 +181,8 @@ public class ShopDialog extends Table {
         private Label nameText;
         private TextButton priceBtn;
 
-        public ShopItem(ItemData data) {
-
-            setSize(400, 600);
+        ShopItem(ItemData data) {
+            setSize(itemW, itemH);
             setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CARD_BACKGROUND));
             setTouchable(Touchable.enabled);
 
@@ -193,6 +232,11 @@ public class ShopDialog extends Table {
             currentCell = getCell(itemImage);
             currentCell.align(Align.center);
         }
+
+//        @Override
+//        public void setScale(float scaleXY) {
+//            itemImage.setScale(0);
+//        }
 
         void showInformation() {
             ScrollPane scroll = new ScrollPane(informationText);

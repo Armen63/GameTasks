@@ -64,7 +64,7 @@ public class MenuScreen extends AbstractBaseScreen {
             }
         });
         table.add(btnStart)
-                .size(Value.percentWidth(.22f, table), Value.percentHeight(.1f, table))
+                .size(Value.percentWidth(.22f, table), Value.percentHeight(.2f, table))
                 .align(Align.center)
                 .padTop(Value.percentHeight(.45f, table))
                 .row();
@@ -79,7 +79,7 @@ public class MenuScreen extends AbstractBaseScreen {
         });
         table.add(btnExit)
                 .size(Value.percentWidth(.11f, table), Value.percentHeight(.1f, table))
-                .padTop(Value.percentHeight(.35f, table))
+                .padTop(Value.percentHeight(.25f, table))
                 .right()
                 .expandX();
 

@@ -67,7 +67,7 @@ public class CameraManager {
 
 
     private class ZoomGestureHandler extends GestureDetector.GestureAdapter {
-        public float initialZoom = maxZoomBound;
+        float initialZoom = maxZoomBound;
         private boolean isZoom;
 
         @Override

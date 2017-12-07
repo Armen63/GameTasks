@@ -1,6 +1,7 @@
 package com.mygdx.game.game.stage;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,7 +20,7 @@ public class BaseStage extends Stage {
                 VIEWPORT_WIDTH,
                 VIEWPORT_HEIGHT,
                 CameraManager.getInstance().camera
-        ));
+        ),new PolygonSpriteBatch(4000));
     }
 
     public BaseStage(Viewport viewport) {

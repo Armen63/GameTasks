@@ -30,7 +30,7 @@ public class Assets extends AssetManager {
     }
 
 
-    public void loadImages() {
+    private void loadImages() {
         load(Constants.IMAGE_WORLD, Texture.class);
 //        load(Constants.IMAGE_HUD_BG, Texture.class);
         load(Constants.IMAGE_MENU_BG, Texture.class);
@@ -42,7 +42,7 @@ public class Assets extends AssetManager {
 //        load(Constants.IMAGE_SHOP_INFO_BUTTON, Texture.class);
     }
 
-    public FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     public BitmapFont defaultFont = defaultFont();
     public BitmapFont tempFont = tempFont();
     public Skin uiSkin;

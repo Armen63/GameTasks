@@ -22,7 +22,7 @@ public abstract class AbstractBaseScreen extends ScreenAdapter implements InputP
 
     @Override
     public void resize(int width, int height) {
-
+        super.resize(width, height);
     }
 
     @Override

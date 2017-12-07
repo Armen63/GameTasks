@@ -70,12 +70,12 @@ public class GameScreen extends AbstractBaseScreen {
                         UiStage.$(),
                         gsStage,
                         CameraManager.getInstance().getGestureDetector()
-
-
                 )
         );
     }
-
+    public GameStage getGameStage(){
+        return gsStage;
+    }
     private void initHud() {
         app.log("ssssss", "gdx" + Gdx.graphics.getWidth());
         drbBackground = Assets.$().defaultSkin.getDrawable(IMAGE_DARK_GRAY);
@@ -155,7 +155,6 @@ public class GameScreen extends AbstractBaseScreen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         gsStage.getViewport().update(
                 (int) Gdx.graphics.getWidth(),
                 (int) Gdx.graphics.getHeight(),

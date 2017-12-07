@@ -1,7 +1,12 @@
 package com.mygdx.game.game.stage;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.mygdx.game.game.actor.animated.SpineActor;
 import com.mygdx.game.game.screen.MenuScreen;
 import com.mygdx.game.managers.CameraManager;
 import com.mygdx.game.managers.SoundManager;
@@ -33,5 +38,15 @@ public class GameStage extends BaseStage {
             SoundManager.$().stopMusic(MUSIC_GAME_SCREEN);
         }
         return super.keyDown(keyCode);
+    }
+
+    public void addSpineBoy(int x, int y/*, float width, float height*/) {
+        SpineActor actor = new SpineActor("spineboy/", new TextureAtlas(Gdx.files.internal("spineboy/skeleton.atlas")), 1);
+        addActor(actor);
+        actor.setSize(0, 0);
+        actor.getSkeleton().setSkin("level_3");
+        actor.setAnimation(1, "stand", true);
+        actor.setPosition(x, y);
+        actor.addAction(Actions.scaleBy(1, 1, 1.3f, Interpolation.pow3));
     }
 }

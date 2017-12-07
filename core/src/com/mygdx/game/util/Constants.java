@@ -9,15 +9,7 @@ public class Constants {
 
     public static final float VIEWPORT_WIDTH = 1280;
     public static final float VIEWPORT_HEIGHT = 720;
-
-
-//    public static final float W = Gdx.graphics.getWidth();
-//    public static final float H = Gdx.graphics.getHeight();
-
-//    public static final int HUD_DELTA_WIDTH = (int) W;
     public static final int HUD_DELTA_HEIGHT = 80;
-//    public static final float HUD_SPACE = 50f;
-    public static final float HUD_LABEL_WIDTH = 200f;
 
 
     public static final String IMAGE_WORLD = "world.jpg";

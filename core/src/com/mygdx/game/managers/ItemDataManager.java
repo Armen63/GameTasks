@@ -20,9 +20,9 @@ public class ItemDataManager {
 
     public void initList() {
         Json json = new Json();
-        Array<JsonValue> list = json.fromJson(Array.class, (Gdx.files.internal("shop/shop_items.json")));
-        for (JsonValue values : list) {
-            itemData.add(wrappModel(values));
+        Array list = json.fromJson(Array.class, (Gdx.files.internal("shop/shop_items.json")));
+        for (Object values : list) {
+            itemData.add(wrappModel((JsonValue) values));
         }
     }
 
