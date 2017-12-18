@@ -17,6 +17,7 @@ public class Constants {
 //    public static final String IMAGE_HUD_BG = "bgHud";
     public static final String IMAGE_DARK_GRAY = "dark_gray_bg.9";
     public static final String IMAGE_BUTTON_BG = "bg_btn";
+    public static final String IMAGE_USE_BUTTON = "use_btn";
 
     public static final String IMAGE_SHOP_BTN = "shop_btn";
     public static final String IMAGE_CLOSE_SHOP = "close_shop_dialog";

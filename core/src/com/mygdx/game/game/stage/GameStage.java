@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.mygdx.game.game.actor.animated.SpineActor;
 import com.mygdx.game.game.screen.MenuScreen;
 import com.mygdx.game.managers.CameraManager;
@@ -47,6 +49,15 @@ public class GameStage extends BaseStage {
         actor.getSkeleton().setSkin("level_3");
         actor.setAnimation(1, "stand", true);
         actor.setPosition(x, y);
-        actor.addAction(Actions.scaleBy(1, 1, 1.3f, Interpolation.pow3));
+        actor.addAction(Actions.scaleBy(1, 1, 0.9f, Interpolation.pow3));
+
+        actor.clearListeners();
+        actor.addListener(new DragListener() {
+            @Override
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                actor.setPosition(actor.getX() - actor.getWidth() / 2 + x, actor.getY() - actor.getHeight() / 2 + y);
+            }
+        });
     }
+
 }
