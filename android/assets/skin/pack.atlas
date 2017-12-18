@@ -6,28 +6,28 @@ filter: Nearest,Nearest
 repeat: none
 bg_btn
   rotate: false
-  xy: 2, 138
+  xy: 2, 134
   size: 100, 60
   orig: 100, 60
   offset: 0, 0
   index: -1
 card_background
   rotate: false
-  xy: 2, 200
+  xy: 2, 196
   size: 218, 262
   orig: 218, 262
   offset: 0, 0
   index: -1
 close_shop_dialog
   rotate: false
-  xy: 2, 72
+  xy: 2, 68
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 dark_gray_bg.9
   rotate: false
-  xy: 2, 2
+  xy: 68, 130
   size: 2, 2
   split: 0, 0, 0, 0
   orig: 2, 2
@@ -35,21 +35,28 @@ dark_gray_bg.9
   index: -1
 elixir
   rotate: false
-  xy: 2, 6
+  xy: 2, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 info
   rotate: false
-  xy: 104, 134
+  xy: 104, 130
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shop_btn
   rotate: false
-  xy: 170, 134
+  xy: 170, 130
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+use_btn
+  rotate: false
+  xy: 68, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
