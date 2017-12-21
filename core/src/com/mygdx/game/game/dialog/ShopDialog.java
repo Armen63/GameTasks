@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.ItemData;
 import com.mygdx.game.game.MainController;
 import com.mygdx.game.game.stage.UiStage;
@@ -93,56 +94,62 @@ public class ShopDialog extends Table {
 
         ScrollPane scroll = new ScrollPane(itemScrollTable);
         scroll.setForceScroll(false, false);
+
         for (ItemData data : ItemDataManager.$().itemData) {
-            ShopItem shopCard = new ShopItem(data);
+            final ShopItem shopCard = new ShopItem(data);
             shopCard.setTransform(true);
             itemScrollTable.add(shopCard).size(400, 600);
             shopCard.getItemImage().addListener(new ActorGestureListener() {
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
-                    Gdx.app.log(LOG_TAG, "tap");
+                    Gdx.app.log(LOG_TAG, String.valueOf(shopCard.getNameText()));
                     selectShopItem(shopCard);
                     shopCard.getUseBtn().addListener(new ActorGestureListener() {
                         @Override
                         public void tap(InputEvent event, float x, float y, int count, int button) {
-                            addAction(
-                                    Actions.addAction(new RunnableAction() {
+                            Array<Cell> cells = itemScrollTable.getCells();
+                            Gdx.app.log(LOG_TAG, String.valueOf(cells.size));
+                            Cell currentCell = itemScrollTable.getCell(shopCard);
+                            for (int i = cells.indexOf(currentCell,true); i < cells.size - 1; i++) {
+                                cells.swap(i, i + 1);
+                            }
+                            cells.removeValue(currentCell,true);
+
+                            MainController.getGameScreen().getGameStage().addActor(shopCard);
+                            hide();
+                            shopCard.setPosition((Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f, 0f);
+                            shopCard.addAction(Actions.sequence(
+
+                                    Actions.moveTo(
+                                            (Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f
+                                            , (Gdx.graphics.getHeight()) * .5f
+                                            , 0.6f, Interpolation.pow3Out
+                                    ),
+                                    Actions.moveTo(
+                                            (Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f
+                                            , (Gdx.graphics.getHeight() - shopCard.getHeight()) * .5f
+                                            , 1f, Interpolation.bounceOut
+                                    ),
+
+                                    Actions.scaleTo(0, 0, 1f, Interpolation.exp5Out)
+
+                                    , Actions.addAction(new RunnableAction() {
                                         @Override
                                         public void run() {
-                                            hide();
-                                            MainController.getGameScreen().getGameStage().addActor(shopCard);
-                                            shopCard.setPosition((Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f, 0f);
-                                            shopCard.addAction(Actions.sequence(
-
-                                                    Actions.moveTo(
-                                                            (Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f
-                                                            , (Gdx.graphics.getHeight()) * .5f
-                                                            , 0.6f, Interpolation.pow3Out
-                                                    ),
-                                                    Actions.moveTo(
-                                                            (Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f
-                                                            , (Gdx.graphics.getHeight() - shopCard.getHeight()) * .5f
-                                                            , 1f, Interpolation.bounceOut
-                                                    ),
-
-                                                    Actions.scaleTo(0, 0, 1f, Interpolation.exp5Out)
-
-                                                    , Actions.addAction(new RunnableAction() {
-                                                        @Override
-                                                        public void run() {
-                                                            shopCard.remove();
-                                                            MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY());
-                                                        }
-                                                    })
-                                            ));
-                                            shopCard.getUseBtn().setVisible(false);
+                                            shopCard.remove();
+                                            shopCard.debugAll();
+                                            MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY());
                                         }
-                                    }));
+                                    })
+                            ));
+                            shopCard.getUseBtn().setVisible(false);
                         }
                     });
                 }
             });
         }
+
+        Gdx.app.log(LOG_TAG, "asdasdadaasda");
         add(scroll)
                 .size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2.1f)
                 .colspan(2);
@@ -161,10 +168,10 @@ public class ShopDialog extends Table {
         }
         shopItem.getUseBtn().setVisible(true);
         tempitem = shopItem;
-
     }
 
     public void show() {
+        Gdx.app.log(LOG_TAG, "show method");
         isOpened = true;
         setPosition(0, -(Gdx.graphics.getHeight() / 1.8f));
         UiStage.$().addActor(this);
@@ -190,14 +197,17 @@ public class ShopDialog extends Table {
         private static final int STATE_CARD_VIEW = 1;
         private static final int STATE_INFO_VIEW = 2;
 
-        int itemW = 400;
-        int itemH = 600;
-
-
         private Cell currentCell;
         private Table mainTable;
 
+
         private int currentState = STATE_CARD_VIEW;
+
+        public int getId() {
+            return id;
+        }
+
+        private int id;
         private Button informationBtn;
         private Image itemImage;
         private Label informationText;
@@ -205,12 +215,17 @@ public class ShopDialog extends Table {
         private TextButton priceBtn;
         private Button useBtn;
 
+        public Label getNameText() {
+            return nameText;
+        }
+
         ShopItem(ItemData data) {
             mainTable = new Table();
-            mainTable.setSize(itemW, itemH);
             mainTable.setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CARD_BACKGROUND));
             setTouchable(Touchable.enabled);
 
+
+            id = data.id;
             informationBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
             informationBtn.addListener(new ActorGestureListener() {
                 @Override
@@ -266,7 +281,6 @@ public class ShopDialog extends Table {
             currentCell = mainTable.getCell(itemImage);
             currentCell.align(Align.center);
         }
-
 
         public Image getItemImage() {
             return itemImage;
