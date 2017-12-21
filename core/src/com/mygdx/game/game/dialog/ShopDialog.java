@@ -43,6 +43,7 @@ public class ShopDialog extends Table {
     private Button closeDialogBtn;
     private Label shopCardText;
     private Table itemScrollTable;
+    private ShopItem tempItem;
 
     {
         addListener(new EventListener() {
@@ -102,24 +103,22 @@ public class ShopDialog extends Table {
             shopCard.getItemImage().addListener(new ActorGestureListener() {
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
-                    Gdx.app.log(LOG_TAG, String.valueOf(shopCard.getNameText()));
                     selectShopItem(shopCard);
                     shopCard.getUseBtn().addListener(new ActorGestureListener() {
                         @Override
                         public void tap(InputEvent event, float x, float y, int count, int button) {
                             Array<Cell> cells = itemScrollTable.getCells();
-                            Gdx.app.log(LOG_TAG, String.valueOf(cells.size));
                             Cell currentCell = itemScrollTable.getCell(shopCard);
-                            for (int i = cells.indexOf(currentCell,true); i < cells.size - 1; i++) {
+                            int index = cells.indexOf(currentCell, true);
+                            for (int i = index; i < cells.size - 1; i++) {
                                 cells.swap(i, i + 1);
                             }
-                            cells.removeValue(currentCell,true);
+                            cells.removeValue(currentCell, true);
 
                             MainController.getGameScreen().getGameStage().addActor(shopCard);
                             hide();
                             shopCard.setPosition((Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f, 0f);
                             shopCard.addAction(Actions.sequence(
-
                                     Actions.moveTo(
                                             (Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f
                                             , (Gdx.graphics.getHeight()) * .5f
@@ -149,7 +148,6 @@ public class ShopDialog extends Table {
             });
         }
 
-        Gdx.app.log(LOG_TAG, "asdasdadaasda");
         add(scroll)
                 .size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2.1f)
                 .colspan(2);
@@ -160,18 +158,15 @@ public class ShopDialog extends Table {
         setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 1.8f);
     }
 
-    ShopItem tempitem;
-
     private void selectShopItem(ShopItem shopItem) {
-        if (tempitem != null) {
-            tempitem.getUseBtn().setVisible(false);
+        if (tempItem != null) {
+            tempItem.getUseBtn().setVisible(false);
         }
         shopItem.getUseBtn().setVisible(true);
-        tempitem = shopItem;
+        tempItem = shopItem;
     }
 
     public void show() {
-        Gdx.app.log(LOG_TAG, "show method");
         isOpened = true;
         setPosition(0, -(Gdx.graphics.getHeight() / 1.8f));
         UiStage.$().addActor(this);
@@ -199,15 +194,7 @@ public class ShopDialog extends Table {
 
         private Cell currentCell;
         private Table mainTable;
-
-
         private int currentState = STATE_CARD_VIEW;
-
-        public int getId() {
-            return id;
-        }
-
-        private int id;
         private Button informationBtn;
         private Image itemImage;
         private Label informationText;
@@ -215,9 +202,6 @@ public class ShopDialog extends Table {
         private TextButton priceBtn;
         private Button useBtn;
 
-        public Label getNameText() {
-            return nameText;
-        }
 
         ShopItem(ItemData data) {
             mainTable = new Table();
@@ -225,7 +209,6 @@ public class ShopDialog extends Table {
             setTouchable(Touchable.enabled);
 
 
-            id = data.id;
             informationBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
             informationBtn.addListener(new ActorGestureListener() {
                 @Override
@@ -282,11 +265,11 @@ public class ShopDialog extends Table {
             currentCell.align(Align.center);
         }
 
-        public Image getItemImage() {
+        Image getItemImage() {
             return itemImage;
         }
 
-        public Button getUseBtn() {
+        Button getUseBtn() {
             return useBtn;
         }
 

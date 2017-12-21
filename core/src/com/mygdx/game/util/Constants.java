@@ -14,7 +14,6 @@ public class Constants {
 
     public static final String IMAGE_WORLD = "world.jpg";
     public static final String IMAGE_MENU_BG = "menu/menu_bg.jpg";
-//    public static final String IMAGE_HUD_BG = "bgHud";
     public static final String IMAGE_DARK_GRAY = "dark_gray_bg.9";
     public static final String IMAGE_BUTTON_BG = "bg_btn";
     public static final String IMAGE_USE_BUTTON = "use_btn";

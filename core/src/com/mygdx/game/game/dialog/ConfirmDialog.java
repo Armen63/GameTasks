@@ -2,15 +2,12 @@ package com.mygdx.game.game.dialog;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.stage.MenuStage;
 import com.mygdx.game.util.Assets;
@@ -41,7 +38,7 @@ public class ConfirmDialog extends BaseDialog {
     public void initUi() {
         mainTable = new Table(Assets.$().uiSkin);
         group.addActor(mainTable);
-        mainTable.setBackground(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_DARK_GRAY))));
+        mainTable.setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_DARK_GRAY));
         mainTable.setSize(
                 MenuStage.$().getWidth() / 2,
                 MenuStage.$().getHeight() / 1.5f
@@ -66,7 +63,7 @@ public class ConfirmDialog extends BaseDialog {
 
 
     public ConfirmDialog setPositiveButton(String text, ActorGestureListener listener) {
-        btnYes = new TextButton(text, new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().uiSkin.getFont("myFont")));
+        btnYes = new TextButton(text, new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
 
         mainTable.add(btnYes)
                 .align(Align.bottom)
@@ -79,7 +76,7 @@ public class ConfirmDialog extends BaseDialog {
     }
 
     public ConfirmDialog setNegativeButton(String text, ActorGestureListener listener) {
-        btnNo = new TextButton(text, new TextButton.TextButtonStyle(new TextureRegionDrawable(new TextureRegion((Texture) Assets.$().get(Constants.IMAGE_BUTTON_BG))), null, null, Assets.$().uiSkin.getFont("myFont")));
+        btnNo = new TextButton(text, new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
         mainTable.add(btnNo)
                 .align(Align.bottom)
                 .width(Value.percentWidth(.3f, mainTable))
