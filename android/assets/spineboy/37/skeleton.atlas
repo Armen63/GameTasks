@@ -1,0 +1,132 @@
+
+skeleton.png
+size: 1874,705
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Habitats/Giant_Habitat/chain_1
+  rotate: false
+  xy: 1471, 19
+  size: 168, 98
+  orig: 169, 102
+  offset: 1, 0
+  index: -1
+Habitats/Giant_Habitat/chain_2
+  rotate: false
+  xy: 1295, 16
+  size: 174, 101
+  orig: 174, 103
+  offset: 0, 0
+  index: -1
+Habitats/Giant_Habitat/column
+  rotate: true
+  xy: 1705, 16
+  size: 140, 82
+  orig: 140, 82
+  offset: 0, 0
+  index: -1
+Habitats/Giant_Habitat/level_1
+  rotate: true
+  xy: 2, 4
+  size: 699, 417
+  orig: 700, 417
+  offset: 1, 0
+  index: -1
+Habitats/Giant_Habitat/level_2
+  rotate: true
+  xy: 421, 7
+  size: 696, 421
+  orig: 700, 421
+  offset: 4, 0
+  index: -1
+Habitats/Giant_Habitat/level_2_fg
+  rotate: true
+  xy: 1789, 7
+  size: 29, 61
+  orig: 29, 61
+  offset: 0, 0
+  index: -1
+Habitats/Giant_Habitat/level_2_hand
+  rotate: false
+  xy: 1641, 2
+  size: 36, 27
+  orig: 36, 27
+  offset: 0, 0
+  index: -1
+Habitats/Giant_Habitat/level_2_head
+  rotate: false
+  xy: 1641, 31
+  size: 37, 32
+  orig: 37, 32
+  offset: 0, 0
+  index: -1
+Habitats/Giant_Habitat/level_3
+  rotate: true
+  xy: 844, 41
+  size: 662, 449
+  orig: 673, 449
+  offset: 0, 0
+  index: -1
+Habitats/Lion_Habitat/hammer
+  rotate: true
+  xy: 1625, 130
+  size: 158, 78
+  orig: 158, 78
+  offset: 0, 0
+  index: -1
+Habitats/Lion_Habitat/saw
+  rotate: true
+  xy: 1796, 316
+  size: 131, 76
+  orig: 131, 76
+  offset: 0, 0
+  index: -1
+Habitats/claim
+  rotate: false
+  xy: 1789, 69
+  size: 64, 87
+  orig: 64, 87
+  offset: 0, 0
+  index: -1
+Habitats/grass
+  rotate: true
+  xy: 1295, 119
+  size: 584, 328
+  orig: 602, 329
+  offset: 18, 0
+  index: -1
+Habitats/hat
+  rotate: true
+  xy: 1625, 449
+  size: 254, 226
+  orig: 254, 226
+  offset: 0, 0
+  index: -1
+Habitats/lumber_0
+  rotate: false
+  xy: 1625, 290
+  size: 169, 157
+  orig: 169, 157
+  offset: 0, 0
+  index: -1
+Habitats/lumber_1
+  rotate: false
+  xy: 1705, 158
+  size: 144, 130
+  orig: 144, 130
+  offset: 0, 0
+  index: -1
+Habitats/smoke
+  rotate: true
+  xy: 1641, 65
+  size: 63, 60
+  orig: 63, 60
+  offset: 0, 0
+  index: -1
+Habitats/stone
+  rotate: false
+  xy: 1789, 38
+  size: 74, 29
+  orig: 74, 29
+  offset: 0, 0
+  index: -1

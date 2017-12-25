@@ -109,9 +109,10 @@ public class ShopDialog extends Table {
                         public void tap(InputEvent event, float x, float y, int count, int button) {
                             Array<Cell> cells = itemScrollTable.getCells();
                             Cell currentCell = itemScrollTable.getCell(shopCard);
-                            int index = cells.indexOf(currentCell, true);
-                            for (int i = index; i < cells.size - 1; i++) {
+                            for (int i = cells.indexOf(currentCell, true); i < cells.size - 1; i++) {
+                                Gdx.app.log(LOG_TAG, i + "");
                                 cells.swap(i, i + 1);
+
                             }
                             cells.removeValue(currentCell, true);
 
@@ -136,8 +137,7 @@ public class ShopDialog extends Table {
                                         @Override
                                         public void run() {
                                             shopCard.remove();
-                                            shopCard.debugAll();
-                                            MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY());
+                                            MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY(), shopCard.getId());
                                         }
                                     })
                             ));
@@ -159,6 +159,11 @@ public class ShopDialog extends Table {
     }
 
     private void selectShopItem(ShopItem shopItem) {
+        if(tempItem == shopItem) {
+            Gdx.app.log(LOG_TAG,"shop " +shopItem.getNameText() + "temp " + tempItem.getNameText());
+            shopItem.getUseBtn().setVisible(false);
+            return;
+        }
         if (tempItem != null) {
             tempItem.getUseBtn().setVisible(false);
         }
@@ -188,7 +193,7 @@ public class ShopDialog extends Table {
     }
 
 
-    private class ShopItem extends Stack {
+    public class ShopItem extends Stack {
         private static final int STATE_CARD_VIEW = 1;
         private static final int STATE_INFO_VIEW = 2;
 
@@ -201,13 +206,20 @@ public class ShopDialog extends Table {
         private Label nameText;
         private TextButton priceBtn;
         private Button useBtn;
+        private int id;
 
-
+        public int getId() {
+            return id;
+        }
+        public Label getNameText() {
+            return nameText;
+        }
         ShopItem(ItemData data) {
             mainTable = new Table();
             mainTable.setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CARD_BACKGROUND));
             setTouchable(Touchable.enabled);
 
+            id = data.id;
 
             informationBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_SHOP_INFO_BUTTON));
             informationBtn.addListener(new ActorGestureListener() {

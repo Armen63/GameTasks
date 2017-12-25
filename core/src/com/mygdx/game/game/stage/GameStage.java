@@ -42,8 +42,8 @@ public class GameStage extends BaseStage {
         return super.keyDown(keyCode);
     }
 
-    public void addSpineBoy(int x, int y/*, float width, float height*/) {
-        SpineActor actor = new SpineActor("spineboy/", new TextureAtlas(Gdx.files.internal("spineboy/skeleton.atlas")), 1);
+    public void addSpineBoy(int x, int y, int id) {
+        SpineActor actor = new SpineActor("spineboy/" + id + "/", new TextureAtlas(Gdx.files.internal("spineboy/skeleton.atlas")), 1);
         addActor(actor);
         actor.setSize(0, 0);
         actor.getSkeleton().setSkin("level_3");
