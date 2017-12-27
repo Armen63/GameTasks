@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.mygdx.game.game.MainController;
+import com.mygdx.game.game.stage.GameStage;
 import com.mygdx.game.game.stage.UiStage;
 import com.mygdx.game.util.Constants;
 
@@ -110,6 +111,8 @@ public class CameraManager {
             initialZoom = ((OrthographicCamera) stage.getCamera()).zoom;
 
             isZoom = false;
+            ((GameStage)stage).hideAllItemsCloseButtons();
+
             return false;
         }
 

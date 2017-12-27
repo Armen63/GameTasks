@@ -123,6 +123,8 @@ public class ShopDialog extends Table {
                     MainController.getGameScreen().getGameStage().addActor(shopCard);
                     hide();
                     shopCard.getUseBtn().setVisible(false);
+                    shopCard.setTouchable(Touchable.disabled);
+
                     shopCard.setPosition((Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f, 0f);
                     shopCard.addAction(Actions.sequence(
                             Actions.moveTo(
@@ -142,7 +144,7 @@ public class ShopDialog extends Table {
                                 @Override
                                 public void run() {
                                     shopCard.remove();
-                                    MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY(), shopCard.getId());
+                                    MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY(), data);
                                 }
                             })
                     ));
