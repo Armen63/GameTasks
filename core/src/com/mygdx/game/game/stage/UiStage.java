@@ -18,7 +18,6 @@ public class UiStage extends BaseStage {
 
     private UiStage(ScreenViewport viewport, Batch batch) {
         super(viewport,batch);
-        Gdx.app.log("Uistage", "constructor");
         Gdx.input.setCatchBackKey(true);
 
     }

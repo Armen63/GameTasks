@@ -54,7 +54,6 @@ public class GameScreen extends AbstractBaseScreen {
     @Override
     public void show() {
         ItemDataManager.$().initList();
-        shopDialog = new ShopDialog();
         SoundManager.$().stopMusic(MUSIC_MENU_SCREEN);
         SoundManager.$().playMusic(MUSIC_GAME_SCREEN, false, 0.8f);
 
@@ -137,6 +136,7 @@ public class GameScreen extends AbstractBaseScreen {
         shopDialogBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                shopDialog = new ShopDialog();
                 shopDialog.show();
             }
         });

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.game.ItemData;
 import com.mygdx.game.game.actor.animated.SpineActor;
+import com.mygdx.game.managers.ShopItemManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
 
@@ -20,6 +21,8 @@ import com.mygdx.game.util.Constants;
  */
 
 public class ItemActor extends Group {
+    private static final String LOG_TAG = ItemActor.class.getName();
+
     private int groupW = 450;
     private int groupY = 300;
     private Button closeBtn;
@@ -28,36 +31,20 @@ public class ItemActor extends Group {
     public ItemActor(int x, int y, ItemData itemData) {
         setPosition(x, y);
         setSize(groupW, groupY);
+
         initCloseBtn();
         initItem(itemData);
-        initListeners();
+        initListeners(itemData);
     }
 
-    private void initListeners() {
-        addListener(new DragListener() {
-            @Override
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                setPosition(getX() - getWidth() / 2 + x, getY() - getHeight() / 2 + y + 100);
-            }
-        });
+    private void initCloseBtn() {
+        closeBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
+        closeBtn.setPosition(370, 0);
+        closeBtn.setSize(80, 80);
+        closeBtn.align(Align.topRight);
+        closeBtn.setVisible(false);
 
-        addListener(new ActorGestureListener() {
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                Gdx.app.log("item "," from tap");
-                if (closeBtn.isVisible())
-                    closeBtn.setVisible(false);
-                else
-                    closeBtn.setVisible(true);
-                event.stop();
-            }
-        });
-        closeBtn.addListener(new ActorGestureListener() {
-            @Override
-            public void tap(InputEvent event, float x, float y, int count, int button) {
-                remove();
-            }
-        });
+        addActor(closeBtn);
     }
 
     private void initItem(ItemData itemData) {
@@ -70,15 +57,34 @@ public class ItemActor extends Group {
         addActor(actor);
     }
 
-    private void initCloseBtn() {
-        closeBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
-        closeBtn.setPosition(370, 0);
-        closeBtn.setSize(80, 80);
-        closeBtn.align(Align.topRight);
-        closeBtn.setVisible(false);
+    private void initListeners(ItemData itemData) {
+        addListener(new DragListener() {
+            @Override
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                setPosition(getX() - getWidth() / 2 + x, getY() - getHeight() / 2 + y + 100);
+            }
+        });
 
-        addActor(closeBtn);
+        addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                Gdx.app.log(LOG_TAG,""+itemData.id);
+                if (closeBtn.isVisible())
+                    closeBtn.setVisible(false);
+                else
+                    closeBtn.setVisible(true);
+                event.stop();
+            }
+        });
+        closeBtn.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                ShopItemManager.$().itemData.add(itemData);
+                remove();
+            }
+        });
     }
+
 
     public Button getCloseBtn() {
         return closeBtn;

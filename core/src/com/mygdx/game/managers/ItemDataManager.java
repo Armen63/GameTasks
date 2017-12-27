@@ -14,7 +14,7 @@ public class ItemDataManager {
     private static ItemDataManager instance;
     public Array<ItemData> itemData = new Array<>();
 
-    private ItemDataManager() {
+    ItemDataManager() {
 
     }
 

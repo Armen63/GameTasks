@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.ItemData;
 import com.mygdx.game.game.MainController;
 import com.mygdx.game.game.stage.UiStage;
-import com.mygdx.game.managers.ItemDataManager;
+import com.mygdx.game.managers.ShopItemManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
 
@@ -39,12 +39,14 @@ public class ShopDialog extends Table {
     private static final String LOG_TAG = ShopDialog.class.getName();
 
     private static ShopDialog instance;
-    private boolean isOpened;
+    private boolean isOpened = true;
     private Button closeDialogBtn;
     private Label shopCardText;
     private Table itemScrollTable;
     private ShopItem tempItem;
 
+    public ScrollPane scroll;
+    Array<ShopItem> allItems = new Array<>();
     {
         addListener(new EventListener() {
             @Override
@@ -89,16 +91,17 @@ public class ShopDialog extends Table {
     }
 
     private void initScrollTable() {
-
+        Gdx.app.log(LOG_TAG,"asdasdasdas");
         itemScrollTable = new Table();
         itemScrollTable.align(Align.center);
         itemScrollTable.setPosition(0, 0);
 
-        ScrollPane scroll = new ScrollPane(itemScrollTable);
+        scroll = new ScrollPane(itemScrollTable);
         scroll.setForceScroll(false, false);
 
-        for (ItemData data : ItemDataManager.$().itemData) {
+        for (ItemData data : ShopItemManager.$().itemData) {
             final ShopItem shopCard = new ShopItem(data);
+            allItems.add(shopCard);
             shopCard.setTransform(true);
             itemScrollTable.add(shopCard).size(400, 600);
             shopCard.getItemImage().addListener(new ActorGestureListener() {
@@ -116,7 +119,6 @@ public class ShopDialog extends Table {
                     for (int i = cells.indexOf(currentCell, true); i < cells.size - 1; i++) {
                         Gdx.app.log(LOG_TAG, i + "");
                         cells.swap(i, i + 1);
-
                     }
                     cells.removeValue(currentCell, true);
 
@@ -145,12 +147,14 @@ public class ShopDialog extends Table {
                                 public void run() {
                                     shopCard.remove();
                                     MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY(), data);
+                                    ShopItemManager.$().itemData.removeValue(data,true);
                                 }
                             })
                     ));
                 }
             });
         }
+        Gdx.app.log(LOG_TAG, allItems.size +"");
         add(scroll)
                 .size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2.1f)
                 .colspan(2);
@@ -175,10 +179,10 @@ public class ShopDialog extends Table {
     }
 
     public void show() {
-        isOpened = true;
         setPosition(0, -(Gdx.graphics.getHeight() / 1.8f));
         UiStage.$().addActor(this);
         addAction(Actions.moveTo(0, 0, 1f, Interpolation.swing));
+        isOpened = true;
     }
 
     private void hide() {
@@ -230,6 +234,7 @@ public class ShopDialog extends Table {
             informationBtn.addListener(new ActorGestureListener() {
                 @Override
                 public void tap(InputEvent event, float x, float y, int count, int button) {
+                    useBtn.setVisible(false);
                     changeState();
                 }
             });
