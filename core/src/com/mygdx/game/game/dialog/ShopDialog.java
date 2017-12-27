@@ -89,6 +89,7 @@ public class ShopDialog extends Table {
     }
 
     private void initScrollTable() {
+
         itemScrollTable = new Table();
         itemScrollTable.align(Align.center);
         itemScrollTable.setPosition(0, 0);
@@ -121,6 +122,7 @@ public class ShopDialog extends Table {
 
                     MainController.getGameScreen().getGameStage().addActor(shopCard);
                     hide();
+                    shopCard.getUseBtn().setVisible(false);
                     shopCard.setPosition((Gdx.graphics.getWidth() - shopCard.getWidth()) * .5f, 0f);
                     shopCard.addAction(Actions.sequence(
                             Actions.moveTo(
