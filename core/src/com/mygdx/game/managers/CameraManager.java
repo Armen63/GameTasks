@@ -13,12 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
-import com.mygdx.game.game.MainController;
+import com.mygdx.game.controller.MainController;
 import com.mygdx.game.game.stage.GameStage;
 import com.mygdx.game.game.stage.UiStage;
 import com.mygdx.game.util.Constants;
-
-import static com.badlogic.gdx.Gdx.app;
 
 /**
  * Created by Armen on 10/23/2017.
@@ -52,12 +50,10 @@ public class CameraManager {
             public boolean scrolled(int amount) {
                 return true;
             }
-
         };
 
         camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT * (Gdx.graphics.getHeight() / Gdx.graphics.getWidth()));
         camera.position.set(0, 0, 0); // ?????
-        app.log(LOG_TAG, "ssss" + camera.viewportWidth + "    " + camera.viewportHeight);
 
         camera.update();
     }
@@ -77,7 +73,6 @@ public class CameraManager {
             stage.getCamera().unproject(touchPos);
 
             float alpha = MainController.getGameScreen().wordBg.getColor().a;
-            app.log("asdasda", alpha + "");
 
             if ((int) alpha > 0)
                 MainController.getGameScreen().wordBg.getColor().set(
@@ -94,7 +89,6 @@ public class CameraManager {
                         1f
                 );
             }
-            app.log(LOG_TAG, " alpha = " + alpha);
 
             return false;
         }
@@ -105,7 +99,6 @@ public class CameraManager {
             if (pointer != 0) {
                 return false;
             }
-            app.log(LOG_TAG, "xxt= " + x + " y = " + y);
             stage.getRoot().clearActions();
             UiStage.$().setScrollFocus(null);
             initialZoom = ((OrthographicCamera) stage.getCamera()).zoom;
@@ -118,7 +111,6 @@ public class CameraManager {
 
         @Override
         public boolean zoom(float initialDistance, float distance) {
-//            app.log(LOG_TAG, "zoom");
             isZoom = true;
 
             float ratio = initialDistance / distance;
@@ -126,7 +118,6 @@ public class CameraManager {
 
 
             ((OrthographicCamera) stage.getCamera()).zoom = zoom;
-            app.log(LOG_TAG, " zoom  = " + zoom);
             float x = MathUtils.clamp(
                     stage.getCamera().position.x, stage.getCamera().viewportWidth * ((OrthographicCamera) stage.getCamera()).zoom * .5f,
                     Gdx.graphics.getWidth() - stage.getCamera().viewportWidth * ((OrthographicCamera) stage.getCamera()).zoom * .5f);
@@ -143,12 +134,10 @@ public class CameraManager {
 
         @Override
         public void pinchStop() {
-            app.log(LOG_TAG, "pinch stop");
         }
 
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY) {
-//            /app.log(LOG_TAG, "pan");
             if (isZoom) {
                 return false;
             }
@@ -164,7 +153,6 @@ public class CameraManager {
 
         @Override
         public boolean panStop(float x, float y, int pointer, int button) {
-//            app.log(LOG_TAG, "pan stop");
             if (isZoom)
                 return false;
             float xx;
@@ -200,7 +188,6 @@ public class CameraManager {
 
         @Override
         public boolean fling(float velocityX, float velocityY, int button) {
-//            app.log(LOG_TAG, "fling ");
             if (isZoom)
                 return false;
             float duration = 0.9f; //Vector2.len2(velocityX, velocityY);
@@ -237,7 +224,7 @@ public class CameraManager {
 
     }
 
-    public static CameraManager getInstance() {
+    public static CameraManager $() {
         return instance == null ? instance = new CameraManager() : instance;
     }
 
@@ -253,20 +240,14 @@ public class CameraManager {
         }
 
         stage.getRoot().clearActions();
-        app.log(LOG_TAG, "camera position  = " + camera.position.x + " x = " + x + " havayi = ");
-
-
         cameraActor.setX(stage.getCamera().position.x);
         cameraActor.setY(stage.getCamera().position.y);
 
-
         if (x != null && y != null) {
-
             if (cameraActor.getX() != x || cameraActor.getY() != y) {
                 MoveToAction moveToAction = Actions.moveTo(x, y, duration, interpolation);
                 moveToAction.setTarget(cameraActor);
                 stage.getRoot().addAction(moveToAction);
-
                 isUpdatable = true;
             }
         }

@@ -22,7 +22,7 @@ public class SoundManager {
 
 
     boolean isPlaying;
-    public Array<String> preLoadAudio = new Array<String>();
+    private Array<String> preLoadAudio = new Array<String>();
     private ObjectMap<String, Music> musicMap = new ObjectMap<String, Music>();
     private ObjectMap<String, Sound> soundMap = new ObjectMap<String, Sound>();
 
@@ -66,7 +66,8 @@ public class SoundManager {
                 }
             }
             if (sound != null) {
-//				sound.setLooping(loop);
+
+
                 sound.play();
             }
         }

@@ -14,20 +14,20 @@ import static com.mygdx.game.util.Constants.VIEWPORT_WIDTH;
  * Created by Armen on 11/6/2017.
  */
 
-public class BaseStage extends Stage {
-    public BaseStage() {
+class BaseStage extends Stage {
+    BaseStage() {
         super(new FitViewport(
                 VIEWPORT_WIDTH,
                 VIEWPORT_HEIGHT,
-                CameraManager.getInstance().camera
+                CameraManager.$().camera
         ),new PolygonSpriteBatch(4000));
     }
 
-    public BaseStage(Viewport viewport) {
+    BaseStage(Viewport viewport) {
         super(viewport);
     }
 
-    public BaseStage(Viewport viewport, Batch batch) {
+    BaseStage(Viewport viewport, Batch batch) {
         super(viewport, batch);
     }
 

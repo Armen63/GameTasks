@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.game.ItemData;
 import com.mygdx.game.game.actor.animated.SpineActor;
 import com.mygdx.game.managers.ShopItemManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.data.ItemData;
 
 /**
  * Created by Armen on 12/27/2017.
@@ -24,7 +24,7 @@ public class ItemActor extends Group {
     private static final String LOG_TAG = ItemActor.class.getName();
 
     private int groupW = 450;
-    private int groupY = 300;
+    private int groupY = 360;
     private Button closeBtn;
     private SpineActor actor;
 
@@ -39,7 +39,7 @@ public class ItemActor extends Group {
 
     private void initCloseBtn() {
         closeBtn = new Button(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_CLOSE_SHOP));
-        closeBtn.setPosition(370, 0);
+        closeBtn.setPosition(370, 280);
         closeBtn.setSize(80, 80);
         closeBtn.align(Align.topRight);
         closeBtn.setVisible(false);
@@ -49,10 +49,10 @@ public class ItemActor extends Group {
 
     private void initItem(ItemData itemData) {
         actor = new SpineActor("spineboy/" + itemData.id + "/", new TextureAtlas(Gdx.files.internal("spineboy/skeleton.atlas")), .5f);
-        actor.setPosition(0,80);
+        actor.setPosition(0, 80);
         actor.getSkeleton().setSkin("level_3");
         actor.setAnimation(1, "stand", true);
-        actor.addAction(Actions.scaleBy(1, 1, 0.9f, Interpolation.pow3));
+        actor.addAction(Actions.scaleBy(1, 1, 1, Interpolation.exp5Out));
 
         addActor(actor);
     }
@@ -68,7 +68,6 @@ public class ItemActor extends Group {
         addListener(new ActorGestureListener() {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
-                Gdx.app.log(LOG_TAG,""+itemData.id);
                 if (closeBtn.isVisible())
                     closeBtn.setVisible(false);
                 else
@@ -79,7 +78,7 @@ public class ItemActor extends Group {
         closeBtn.addListener(new ActorGestureListener() {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
-                ShopItemManager.$().itemData.add(itemData);
+                ShopItemManager.$().addItemWithRefresh(itemData);
                 remove();
             }
         });

@@ -24,12 +24,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.game.ItemData;
-import com.mygdx.game.game.MainController;
+import com.mygdx.game.util.data.ItemData;
+import com.mygdx.game.controller.MainController;
 import com.mygdx.game.game.stage.UiStage;
 import com.mygdx.game.managers.ShopItemManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
+
+import static com.mygdx.game.util.Logger.LOG;
 
 /**
  * Created by Armen on 11/17/2017.
@@ -91,7 +93,6 @@ public class ShopDialog extends Table {
     }
 
     private void initScrollTable() {
-        Gdx.app.log(LOG_TAG,"asdasdasdas");
         itemScrollTable = new Table();
         itemScrollTable.align(Align.center);
         itemScrollTable.setPosition(0, 0);
@@ -99,7 +100,7 @@ public class ShopDialog extends Table {
         scroll = new ScrollPane(itemScrollTable);
         scroll.setForceScroll(false, false);
 
-        for (ItemData data : ShopItemManager.$().itemData) {
+        for (ItemData data : ShopItemManager.$().itemDataList) {
             final ShopItem shopCard = new ShopItem(data);
             allItems.add(shopCard);
             shopCard.setTransform(true);
@@ -117,11 +118,10 @@ public class ShopDialog extends Table {
                     Array<Cell> cells = itemScrollTable.getCells();
                     Cell currentCell = itemScrollTable.getCell(shopCard);
                     for (int i = cells.indexOf(currentCell, true); i < cells.size - 1; i++) {
-                        Gdx.app.log(LOG_TAG, i + "");
                         cells.swap(i, i + 1);
                     }
                     cells.removeValue(currentCell, true);
-
+                    LOG("aasdasd",data.name);
                     MainController.getGameScreen().getGameStage().addActor(shopCard);
                     hide();
                     shopCard.getUseBtn().setVisible(false);
@@ -145,16 +145,15 @@ public class ShopDialog extends Table {
                             , Actions.addAction(new RunnableAction() {
                                 @Override
                                 public void run() {
-                                    shopCard.remove();
                                     MainController.getGameScreen().getGameStage().addSpineBoy((int) shopCard.getX(), (int) shopCard.getY(), data);
-                                    ShopItemManager.$().itemData.removeValue(data,true);
+                                    ShopItemManager.$().itemDataList.removeValue(data,true);
+                                    shopCard.remove();
                                 }
                             })
                     ));
                 }
             });
         }
-        Gdx.app.log(LOG_TAG, allItems.size +"");
         add(scroll)
                 .size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2.1f)
                 .colspan(2);
@@ -167,7 +166,6 @@ public class ShopDialog extends Table {
 
     private void selectShopItem(ShopItem shopItem) {
         if (tempItem == shopItem && tempItem.getUseBtn().isVisible()) {
-            Gdx.app.log(LOG_TAG, "shop " + shopItem.getNameText() + "temp " + tempItem.getNameText());
             tempItem.getUseBtn().setVisible(false);
             return;
         }
@@ -181,7 +179,7 @@ public class ShopDialog extends Table {
     public void show() {
         setPosition(0, -(Gdx.graphics.getHeight() / 1.8f));
         UiStage.$().addActor(this);
-        addAction(Actions.moveTo(0, 0, 1f, Interpolation.swing));
+        addAction(Actions.moveTo(0, 0, 2f, Interpolation.swing));
         isOpened = true;
     }
 
@@ -238,7 +236,7 @@ public class ShopDialog extends Table {
                     changeState();
                 }
             });
-            itemImage = new Image(new Texture(Gdx.files.internal("shop/items/" + data.id + ".png")));
+            itemImage = new Image(new Texture(Gdx.files.internal("shop/items/" + data.orderBy + ".png")));
             nameText = new Label(data.name, new Label.LabelStyle(new Label.LabelStyle(Assets.$().defaultFont, Color.PINK)));
             nameText.setFontScale(0.65f);
             nameText.setEllipsis(true);

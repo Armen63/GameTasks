@@ -13,8 +13,6 @@ import com.mygdx.game.game.stage.MenuStage;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
 
-import static com.badlogic.gdx.Gdx.app;
-
 /**
  * Created by Armen on 11/9/2017.
  */
@@ -26,16 +24,13 @@ public class ConfirmDialog extends BaseDialog {
     private TextButton btnYes;
     private TextButton btnNo;
 
-    public static final int BTN_FONT_SIZE = 6;
-    public static final int LABEL_FONT_SIZE = 8;
-
-    public ConfirmDialog(Stage stage) {
+    ConfirmDialog(Stage stage) {
         super(stage);
         initUi();
     }
 
 
-    public void initUi() {
+    void initUi() {
         mainTable = new Table(Assets.$().uiSkin);
         group.addActor(mainTable);
         mainTable.setBackground(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_DARK_GRAY));
@@ -47,7 +42,7 @@ public class ConfirmDialog extends BaseDialog {
 
     }
 
-    public ConfirmDialog setDescription(String description) {
+    ConfirmDialog setDescription(String description) {
         lbl_question = new Label("Are you sure ?", new Label.LabelStyle(Assets.$().defaultFont, Color.BLUE));
         mainTable.add(lbl_question)
                 .align(Align.center)
@@ -57,12 +52,11 @@ public class ConfirmDialog extends BaseDialog {
                 .colspan(2)
                 .row();
 
-        app.log("sd", "" + lbl_question.getX());
         return this;
     }
 
 
-    public ConfirmDialog setPositiveButton(String text, ActorGestureListener listener) {
+    ConfirmDialog setPositiveButton(String text, ActorGestureListener listener) {
         btnYes = new TextButton(text, new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
 
         mainTable.add(btnYes)
@@ -75,7 +69,7 @@ public class ConfirmDialog extends BaseDialog {
         return this;
     }
 
-    public ConfirmDialog setNegativeButton(String text, ActorGestureListener listener) {
+    ConfirmDialog setNegativeButton(String text, ActorGestureListener listener) {
         btnNo = new TextButton(text, new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
         mainTable.add(btnNo)
                 .align(Align.bottom)

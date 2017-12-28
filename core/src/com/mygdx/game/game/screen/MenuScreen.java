@@ -59,7 +59,6 @@ public class MenuScreen extends AbstractBaseScreen {
         btnStart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.log("button", "clicked");
                 ((Game) app.getApplicationListener()).setScreen(new GameScreen());
             }
         });
@@ -68,7 +67,6 @@ public class MenuScreen extends AbstractBaseScreen {
                 .align(Align.center)
                 .padTop(Value.percentHeight(.45f, table))
                 .row();
-
 
         btnExit = new TextButton("Exit", new TextButton.TextButtonStyle(Assets.$().defaultSkin.getDrawable(Constants.IMAGE_BUTTON_BG), null, null, Assets.$().defaultFont));
         btnExit.addListener(new ClickListener() {

@@ -25,7 +25,6 @@ import com.mygdx.game.managers.SoundManager;
 import com.mygdx.game.util.Assets;
 import com.mygdx.game.util.Constants;
 
-import static com.badlogic.gdx.Gdx.app;
 import static com.mygdx.game.util.Constants.HUD_DELTA_HEIGHT;
 import static com.mygdx.game.util.Constants.IMAGE_DARK_GRAY;
 import static com.mygdx.game.util.Constants.IMAGE_SHOP_BTN;
@@ -53,6 +52,7 @@ public class GameScreen extends AbstractBaseScreen {
 
     @Override
     public void show() {
+        CameraManager.$().camera.zoom = 1;
         ItemDataManager.$().initList();
         SoundManager.$().stopMusic(MUSIC_MENU_SCREEN);
         SoundManager.$().playMusic(MUSIC_GAME_SCREEN, false, 0.8f);
@@ -68,7 +68,7 @@ public class GameScreen extends AbstractBaseScreen {
                 new InputMultiplexer(
                         UiStage.$(),
                         gsStage,
-                        CameraManager.getInstance().getGestureDetector()
+                        CameraManager.$().getGestureDetector()
                 )
         );
     }
@@ -76,7 +76,6 @@ public class GameScreen extends AbstractBaseScreen {
         return gsStage;
     }
     private void initHud() {
-        app.log("ssssss", "gdx" + Gdx.graphics.getWidth());
         drbBackground = Assets.$().defaultSkin.getDrawable(IMAGE_DARK_GRAY);
         mainTable = new Table();
         mainTable.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -156,8 +155,8 @@ public class GameScreen extends AbstractBaseScreen {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gsStage.getViewport().update(
-                (int) Gdx.graphics.getWidth(),
-                (int) Gdx.graphics.getHeight(),
+                Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight(),
                 false
         );
         gsStage.act(delta);
@@ -165,15 +164,15 @@ public class GameScreen extends AbstractBaseScreen {
 
         UiStage.$().getViewport().apply();
         UiStage.$().getViewport().update(
-                (int) Gdx.graphics.getWidth(),
-                (int) Gdx.graphics.getHeight(),
+                Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight(),
                 false
         );
         UiStage.$().act(delta);
         UiStage.$().draw();
 
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            CameraManager.getInstance().handleInput();
+            CameraManager.$().handleInput();
         }
 
     }

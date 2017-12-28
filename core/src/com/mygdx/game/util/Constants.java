@@ -5,12 +5,9 @@ package com.mygdx.game.util;
  */
 
 public class Constants {
-    public static final String FONT_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;,{}\"´`'<>";
-
     public static final float VIEWPORT_WIDTH = 1280;
     public static final float VIEWPORT_HEIGHT = 720;
     public static final int HUD_DELTA_HEIGHT = 80;
-
 
     public static final String IMAGE_WORLD = "world.jpg";
     public static final String IMAGE_MENU_BG = "menu/menu_bg.jpg";

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.game.ItemData;
+import com.mygdx.game.util.data.ItemData;
 
 /**
  * Created by Armen on 11/20/2017.
@@ -14,9 +14,7 @@ public class ItemDataManager {
     private static ItemDataManager instance;
     public Array<ItemData> itemData = new Array<>();
 
-    ItemDataManager() {
-
-    }
+    private ItemDataManager() {    }
 
     public void initList() {
         Json json = new Json();

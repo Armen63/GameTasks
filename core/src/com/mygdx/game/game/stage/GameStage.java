@@ -3,7 +3,7 @@ package com.mygdx.game.game.stage;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.game.ItemData;
+import com.mygdx.game.util.data.ItemData;
 import com.mygdx.game.game.actor.ItemActor;
 import com.mygdx.game.game.screen.MenuScreen;
 import com.mygdx.game.managers.CameraManager;
@@ -22,7 +22,7 @@ public class GameStage extends BaseStage {
 
     public GameStage() {
         super();
-        CameraManager.getInstance().setGameStage(this);
+        CameraManager.$().setGameStage(this);
     }
 
     @Override
@@ -40,16 +40,17 @@ public class GameStage extends BaseStage {
     }
 
 
-
     public void addSpineBoy(int x, int y, ItemData data) {
-        ItemActor actor = new ItemActor(x,y,data);
+        ItemActor actor = new ItemActor(x, y, data);
+        actor.debugAll();
         listOfItems.add(actor);
         addActor(actor);
     }
 
-    public void hideAllItemsCloseButtons(){
+    public void hideAllItemsCloseButtons() {
         for (ItemActor item : listOfItems) {
             item.getCloseBtn().setVisible(false);
+
         }
     }
 

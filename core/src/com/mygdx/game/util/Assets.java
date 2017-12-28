@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-;
 
 /**
  * Created by Armen on 10/18/2017.
@@ -32,14 +31,7 @@ public class Assets extends AssetManager {
 
     private void loadImages() {
         load(Constants.IMAGE_WORLD, Texture.class);
-//        load(Constants.IMAGE_HUD_BG, Texture.class);
         load(Constants.IMAGE_MENU_BG, Texture.class);
-//        load(Constants.IMAGE_DARK_GRAY, Texture.class);
-//        load(Constants.IMAGE_BUTTON_BG, Texture.class);
-//        load(Constants.IMAGE_SHOP_BTN, Texture.class);
-//        load(Constants.IMAGE_CLOSE_SHOP, Texture.class);
-//        load(Constants.IMAGE_CARD_BACKGROUND, Texture.class);
-//        load(Constants.IMAGE_SHOP_INFO_BUTTON, Texture.class);
     }
 
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;

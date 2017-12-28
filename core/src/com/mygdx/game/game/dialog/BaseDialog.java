@@ -17,27 +17,27 @@ import static com.mygdx.game.util.Constants.MUSIC_DIALOG_BLT;
 public abstract class BaseDialog extends Table implements GestureDetector.GestureListener {
 
     Group group;
-    Stage stage;
-    public boolean isOpened = false;
+    private Stage stage;
+    private boolean isOpened = false;
 
 
     public BaseDialog() {
     }
 
-    public BaseDialog(Stage stage) {
+    BaseDialog(Stage stage) {
         this(stage, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    public BaseDialog(Stage stage, float width, float height, float x, float y, boolean isAnimate) {
+    private BaseDialog(Stage stage, float width, float height, float x, float y, boolean isAnimate) {
         group = new Group();
         this.stage = stage;
     }
 
-    public BaseDialog(Stage stage, float width, float height, float x, float y) {
+    private BaseDialog(Stage stage, float width, float height, float x, float y) {
         this(stage, width, height, x, y, false);
     }
 
-    public BaseDialog(Stage stage, float width, float height) {
+    private BaseDialog(Stage stage, float width, float height) {
         this(stage, width, height, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
     }
 
@@ -54,13 +54,10 @@ public abstract class BaseDialog extends Table implements GestureDetector.Gestur
 
     }
 
-    public void hide() {
+    void hide() {
         SoundManager.$().playMusic(MUSIC_DIALOG_BLT,false,1.f);
         isOpened = false;
         group.remove();
-    }
-
-    public void beforeHide() {
     }
 
     @Override
@@ -101,15 +98,6 @@ public abstract class BaseDialog extends Table implements GestureDetector.Gestur
     @Override
     public void pinchStop() {
 
-    }
-
-    public void afterHide() {
-    }
-
-    public void beforeShow() {
-    }
-
-    public void afterShow() {
     }
 
     @Override
